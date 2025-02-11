@@ -21,7 +21,7 @@ import background from "../assets/background.svg";
   const $form = document.getElementById("form");
 
   const renderInfo = (url: string) => {
-    fetch("http://localhost:4321/api/get-information?url=" + url)
+    fetch("/api/get-information?url=" + url)
       .then((res) => res.text())
       .then((data) => {
         if ($iframe) {
