@@ -3,9 +3,9 @@ import { getData } from "../../utils/getData";
 
 export const GET: APIRoute = async ({ request }): Promise<Response> => {
   const urlParams = new URL(request.url);
-  const params = new URLSearchParams(urlParams.search);
+  const params = new URLSearchParams(urlParams.searchParams);
 
-  const url = params.get("url") || "https://www.lavoz.com.ar/deportes/";
+  const url = params.get("continue") || params.get("url") || "";
   const res = await getData(url);
 
   return new Response(res, {
