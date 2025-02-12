@@ -8,7 +8,11 @@ import background from "../assets/background.svg";
     <section id="hero">
       <form id="form">
         <label for="form-url">Ingresa la URL:</label>
-        <input id="form-url" type="url" placeholder="https://example.com" />
+        <input
+          id="form-url"
+          type="url"
+          placeholder="https://pagina-diario.com"
+        />
         <button type="submit">Acceder</button>
       </form>
     </section>
@@ -32,8 +36,9 @@ import background from "../assets/background.svg";
 
   $form?.addEventListener("submit", (e) => {
     e.preventDefault();
-    const url = (document.getElementById("form-url") as HTMLInputElement).value;
-    renderInfo(url);
+    const url = document.getElementById("form-url") as HTMLInputElement;
+    renderInfo(url.value);
+    url.value = "";
   });
 </script>
 
