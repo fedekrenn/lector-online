@@ -1,3 +1,6 @@
+import icon from "../assets/search.svg?url";
+import "../styles/Input-temporal.css";
+
 interface Props {
   url: string;
   historyUrls: string[];
@@ -12,8 +15,7 @@ export const Input = ({ url, historyUrls, setUrl, setData }: Props) => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-      <label htmlFor="form-url">Ingresa la URL:</label>
+    <div className="search-btn">
       <input
         value={url}
         id="form-url"
@@ -21,8 +23,8 @@ export const Input = ({ url, historyUrls, setUrl, setData }: Props) => {
         placeholder="https://pagina-diario.com"
         onChange={(e) => setUrl(e.target.value)}
       />
-      <button style={{ width: "100%" }} onClick={handleSubmit}>
-        Acceder
+      <button onClick={handleSubmit}>
+        <img src={icon} alt="Buscar" />
       </button>
     </div>
   );

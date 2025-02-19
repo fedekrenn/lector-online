@@ -1,0 +1,46 @@
+.search-btn {
+  display: flex;
+  width: 250px;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 5px 5px 5px 15px;
+  border-radius: 25px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease-in-out;
+
+  &:focus-within {
+    width: 400px;
+  }
+
+  & input {
+    border: none;
+
+    &:focus {
+      outline: none;
+      width: 100%;
+    }
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 30px white inset;
+    }
+  }
+
+  & button {
+    background-color: rgb(241, 241, 241);
+    border-radius: 50%;
+    aspect-ratio: 1;
+    border: none;
+    transition: all 0.1s;
+
+    &:hover {
+      background-color: rgb(230, 230, 230);
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+
+    & img {
+      vertical-align: middle;
+      width: 20px;
+    }
+  }
+}
