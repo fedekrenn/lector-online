@@ -1,7 +1,7 @@
 import { History } from "./History";
 import { useState } from "react";
 import { Input } from "./Input";
-import loadingIcon from "../assets/loading.svg?url";
+import { Spinner } from "./Spinner";
 
 export const App = () => {
   const [url, setUrl] = useState<string>("");
@@ -54,19 +54,7 @@ export const App = () => {
         />
       </section>
       {loading ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            height: "100%",
-          }}
-        >
-          <img
-            style={{ width: "50px" }}
-            src={loadingIcon}
-            alt="Ícono de un reloj cargando"
-          />
-        </div>
+        <Spinner />
       ) : (
         <iframe
           style={{
