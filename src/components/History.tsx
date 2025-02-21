@@ -8,7 +8,9 @@ interface Params {
 }
 
 export const History = ({ historyUrls, setData }: Params) => {
-  const [animationParent] = useAutoAnimate({ duration: 400 });
+  const [animationParent] = useAutoAnimate({ duration: 400 }) as unknown as [
+    React.RefObject<HTMLUListElement>
+  ];
 
   return (
     <ul

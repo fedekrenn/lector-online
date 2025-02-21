@@ -1,5 +1,5 @@
 import { History } from "./History";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Input } from "./Input";
 import { Spinner } from "./Spinner";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
@@ -14,7 +14,9 @@ export const App = () => {
 
   const parent = useRef(null);
   const parent2 = useRef(null);
-  const [animationParent] = useAutoAnimate({ duration: 400 });
+  const [animationParent] = useAutoAnimate({ duration: 400 }) as unknown as [
+    React.RefObject<HTMLDivElement>
+  ];
 
   useEffect(() => {
     parent.current && autoAnimate(parent.current);
