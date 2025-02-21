@@ -1,14 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="19 11.999 26 40.002">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="19.25 12.249 25.5 39.502">
   <g />
-  <path fill="#FFF" stroke="#FF019DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-    stroke-miterlimit="10" d="M32 32a9.625 9.625 0 0 1-9.625-9.625v-5.966h19.25v5.966A9.625 9.625 0 0 1 32 32" />
-  <path fill="#FFF" stroke="#FF019DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-    stroke-miterlimit="10"
+  <path fill="#FFF" stroke="#FF67CCFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+    d="M32 32a9.625 9.625 0 0 1-9.625-9.625v-5.966h19.25v5.966A9.625 9.625 0 0 1 32 32" />
+  <path fill="#FFF" stroke="#FF67CCFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
     d="M32 31.839a9.625 9.625 0 0 1 9.625 9.625v5.966h-19.25v-5.966c0-5.315 4.309-9.625 9.625-9.625" />
   <path
     d="M42.42 16.409H21.58a1.83 1.83 0 0 1-1.83-1.83v0c0-1.01.819-1.83 1.83-1.83h20.84c1.01 0 1.83.819 1.83 1.83v0a1.83 1.83 0 0 1-1.83 1.83M21.58 47.43h20.84c1.01 0 1.83.819 1.83 1.83v.161a1.83 1.83 0 0 1-1.83 1.83H21.58a1.83 1.83 0 0 1-1.83-1.83v-.161a1.83 1.83 0 0 1 1.83-1.83"
-    fill="#FFF" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+    fill="#FFF" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" />
+  <path d="M26.75 19.75V25m0 14v5.25" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"
     stroke-miterlimit="10" />
-  <path d="M26.75 19.75V25m0 14v5.25" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"
-    stroke-linejoin="round" stroke-miterlimit="10" />
 </svg>
