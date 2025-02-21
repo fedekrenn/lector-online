@@ -1,4 +1,5 @@
 import { HistoryChild } from "./HistoryChild";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 interface Params {
   visitedUrls: string[];
@@ -7,11 +8,14 @@ interface Params {
 }
 
 export const History = ({ visitedUrls, historyUrls, setData }: Params) => {
+  const [animationParent] = useAutoAnimate({ duration: 400 });
+
   return (
     <ul
+      ref={animationParent}
       style={{
-        listStyle: "none",
         margin: 0,
+        listStyle: "none",
         padding: "0 10px",
         maxWidth: "200px",
       }}

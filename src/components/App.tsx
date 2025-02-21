@@ -1,13 +1,23 @@
 import { History } from "./History";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Input } from "./Input";
 import { Spinner } from "./Spinner";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import autoAnimate from "@formkit/auto-animate";
 
 export const App = () => {
   const [url, setUrl] = useState<string>("");
   const [html, setHtml] = useState<string>("");
   const [visitedUrls, setVisitedUrls] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const parent = useRef(null);
+  const parent2 = useRef(null);
+  const [animationParent] = useAutoAnimate({ duration: 400 });
+
+  useEffect(() => {
+    parent.current && autoAnimate(parent.current);
+  }, [parent]);
 
   const setData = (link: string, historyUrls: string[]) => {
     setLoading(true);
@@ -23,6 +33,7 @@ export const App = () => {
 
   return (
     <main
+      ref={parent}
       style={{
         height: "100%",
         width: "100%",
@@ -33,6 +44,7 @@ export const App = () => {
       }}
     >
       <section
+        ref={animationParent}
         id="hero"
         style={{
           display: "flex",
@@ -41,17 +53,19 @@ export const App = () => {
           padding: "16px",
         }}
       >
-        <Input
-          url={url}
-          historyUrls={visitedUrls}
-          setUrl={setUrl}
-          setData={setData}
-        />
-        <History
-          visitedUrls={visitedUrls}
-          historyUrls={visitedUrls}
-          setData={setData}
-        />
+        <div ref={parent2} style={{ display: "flex" }}>
+          <Input
+            url={url}
+            historyUrls={visitedUrls}
+            setUrl={setUrl}
+            setData={setData}
+          />
+          <History
+            visitedUrls={visitedUrls}
+            historyUrls={visitedUrls}
+            setData={setData}
+          />
+        </div>
       </section>
       {loading ? (
         <Spinner />
