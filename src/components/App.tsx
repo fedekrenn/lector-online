@@ -60,11 +60,7 @@ export const App = () => {
             setUrl={setUrl}
             setData={setData}
           />
-          <History
-            visitedUrls={visitedUrls}
-            historyUrls={visitedUrls}
-            setData={setData}
-          />
+          <History historyUrls={visitedUrls} setData={setData} />
         </div>
       </section>
       {loading ? (

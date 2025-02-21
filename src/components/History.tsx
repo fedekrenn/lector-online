@@ -2,12 +2,11 @@ import { HistoryChild } from "./HistoryChild";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 interface Params {
-  visitedUrls: string[];
   historyUrls: string[];
   setData: (text: string, historyUrls: string[]) => void;
 }
 
-export const History = ({ visitedUrls, historyUrls, setData }: Params) => {
+export const History = ({ historyUrls, setData }: Params) => {
   const [animationParent] = useAutoAnimate({ duration: 400 });
 
   return (
@@ -20,7 +19,7 @@ export const History = ({ visitedUrls, historyUrls, setData }: Params) => {
         maxWidth: "200px",
       }}
     >
-      {visitedUrls.map((url, index) => (
+      {historyUrls.map((url, index) => (
         <HistoryChild
           key={index}
           url={url}
