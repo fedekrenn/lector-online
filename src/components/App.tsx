@@ -4,11 +4,12 @@ import { Input } from "./Input";
 import { Spinner } from "./Spinner";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import autoAnimate from "@formkit/auto-animate";
+import type { VisitedUrl } from "../types/types";
 
 export const App = () => {
   const [url, setUrl] = useState<string>("");
   const [html, setHtml] = useState<string>("");
-  const [visitedUrls, setVisitedUrls] = useState<string[]>([]);
+  const [visitedUrls, setVisitedUrls] = useState<VisitedUrl[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const parent = useRef(null);
@@ -19,14 +20,15 @@ export const App = () => {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
 
-  const setData = (link: string, historyUrls: string[]) => {
+  const setData = (link: string, historyUrls: VisitedUrl[]) => {
     setLoading(true);
 
     fetch("/api/get-information?url=" + link)
       .then((res) => res.text())
       .then((data) => {
         setHtml(data);
-        setVisitedUrls([...historyUrls.slice(-4), link]);
+        const newUrl = { id: Date.now().toString(), url: link };
+        setVisitedUrls([...historyUrls.slice(-4), newUrl]);
       })
       .finally(() => setLoading(false));
   };

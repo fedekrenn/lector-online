@@ -24,7 +24,6 @@ export const Form = ({ setText }: Props) => {
       }}
       onSubmit={handleSubmit}
     >
-      
       <button type="submit">Acceder</button>
     </form>
   );

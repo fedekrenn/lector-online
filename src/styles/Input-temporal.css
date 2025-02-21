@@ -1,6 +1,7 @@
 .search-btn {
   display: flex;
   width: 250px;
+  height: fit-content;
   justify-content: space-between;
   background-color: #fff;
   padding: 5px 5px 5px 15px;

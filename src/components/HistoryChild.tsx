@@ -1,7 +1,9 @@
+import type { VisitedUrl } from "../types/types";
+
 interface Params {
   url: string;
-  historyUrls: string[];
-  setData: (text: string, historyUrls: string[]) => void;
+  historyUrls: VisitedUrl[];
+  setData: (text: string, historyUrls: VisitedUrl[]) => void;
 }
 
 export const HistoryChild = ({ url, historyUrls, setData }: Params) => {

@@ -1,11 +1,12 @@
 import icon from "../assets/search.svg?url";
 import "../styles/Input-temporal.css";
+import type { VisitedUrl } from "../types/types";
 
 interface Props {
   url: string;
-  historyUrls: string[];
+  historyUrls: VisitedUrl[];
   setUrl: (url: string) => void;
-  setData: (text: string, historyUrls: string[]) => void;
+  setData: (text: string, historyUrls: VisitedUrl[]) => void;
 }
 
 export const Input = ({ url, historyUrls, setUrl, setData }: Props) => {
