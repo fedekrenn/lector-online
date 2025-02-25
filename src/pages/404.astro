@@ -1,0 +1,49 @@
+---
+import Layout from "@layouts/Layout.astro";
+---
+
+<Layout title="404 - Página no encontrada">
+  <main>
+    <h1>404 - Página no encontrada!</h1>
+    <p>Lo sentimos, pero la página que buscas no existe.</p>
+    <a href="/">Volver a la página principal</a>
+  </main>
+</Layout>
+
+<style>
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+  }
+
+  a {
+    margin-top: 1rem;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 15px;
+    padding: 0.5rem 1rem;
+    background-color: #dfdede;
+    transition: background-color 0.1s;
+
+    &:visited {
+      color: inherit;
+    }
+
+    &:hover {
+      background-color: #c4c3c3;
+    }
+  }
+</style>
