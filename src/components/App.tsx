@@ -33,8 +33,19 @@ export const App = () => {
       .then((res) => res.text())
       .then((data) => {
         setHtml(data);
-        const newUrl = { id: Date.now().toString(), url: link };
-        setVisitedUrls([...historyUrls.slice(-4), newUrl]);
+
+        const foundIndex = historyUrls.findIndex(({ url }) => url === link);
+
+        if (foundIndex === -1) {
+          const newUrl = { id: Date.now().toString(), url: link };
+          setVisitedUrls([...historyUrls.slice(-4), newUrl]);
+          return;
+        }
+
+        const newUrls = [...historyUrls];
+        const [url] = newUrls.splice(foundIndex, 1);
+        newUrls.push(url);
+        setVisitedUrls(newUrls);
       })
       .finally(() => setLoading(false));
   };
