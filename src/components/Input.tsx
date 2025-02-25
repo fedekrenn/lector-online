@@ -13,13 +13,14 @@ interface Props {
 }
 
 export const Input = ({ url, historyUrls, setUrl, setData }: Props) => {
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setData(url, historyUrls);
     setUrl("");
   };
 
   return (
-    <div className="search-btn">
+    <form className="search-btn" onSubmit={handleSubmit}>
       <input
         value={url}
         id="form-url"
@@ -27,9 +28,9 @@ export const Input = ({ url, historyUrls, setUrl, setData }: Props) => {
         placeholder="https://pagina-diario.com"
         onChange={(e) => setUrl(e.target.value)}
       />
-      <button onClick={handleSubmit}>
+      <button>
         <img src={icon} alt="Buscar" />
       </button>
-    </div>
+    </form>
   );
 };
