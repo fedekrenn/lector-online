@@ -1,4 +1,5 @@
-import type { VisitedUrl } from "../types/types";
+// Types
+import type { VisitedUrl } from "@typos/types";
 
 interface Params {
   url: string;

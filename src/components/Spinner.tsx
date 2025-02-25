@@ -1,5 +1,6 @@
-import loadingIcon from "../assets/loading.svg?url";
-import "../styles/Spinner-temporal.css";
+// Assets
+import loadingIcon from "@assets/loading.svg?url";
+import "@styles/Spinner-temporal.css";
 
 export const Spinner = () => {
   return (

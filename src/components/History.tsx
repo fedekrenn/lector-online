@@ -1,6 +1,9 @@
+// Components
 import { HistoryChild } from "./HistoryChild";
+// Types
+import type { VisitedUrl } from "@typos/types";
+// Libraries
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import type { VisitedUrl } from "../types/types";
 
 interface Params {
   historyUrls: VisitedUrl[];

@@ -1,6 +1,9 @@
-import icon from "../assets/search.svg?url";
-import "../styles/Input-temporal.css";
-import type { VisitedUrl } from "../types/types";
+// assets
+import icon from "@assets/search.svg?url";
+// Styles
+import "@styles/Input-temporal.css";
+// Types
+import type { VisitedUrl } from "@typos/types";
 
 interface Props {
   url: string;

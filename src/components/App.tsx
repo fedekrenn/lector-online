@@ -1,10 +1,13 @@
-import { History } from "./History";
 import React, { useState, useEffect, useRef } from "react";
+// Components
+import { History } from "./History";
 import { Input } from "./Input";
 import { Spinner } from "./Spinner";
+// Types
+import type { VisitedUrl } from "@typos/types";
+// Libraries
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import autoAnimate from "@formkit/auto-animate";
-import type { VisitedUrl } from "../types/types";
 
 export const App = () => {
   const [url, setUrl] = useState<string>("");
@@ -14,6 +17,7 @@ export const App = () => {
 
   const parent = useRef(null);
   const parent2 = useRef(null);
+
   const [animationParent] = useAutoAnimate({ duration: 400 }) as unknown as [
     React.RefObject<HTMLDivElement>
   ];

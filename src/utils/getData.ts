@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios";
 
 export const getData = async (url: string) => {
   const response = await axios.get(url);
