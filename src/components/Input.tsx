@@ -3,7 +3,7 @@ import icon from "@assets/search.svg?url";
 // Styles
 import "@styles/Input-temporal.css";
 // Types
-import type { UrlData, VisitedUrlData } from "@typos/types";
+import type { FetchedResource, VisitedUrlData } from "@typos/types";
 
 interface Props {
   url: string;

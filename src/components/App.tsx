@@ -4,7 +4,7 @@ import { History } from "./History";
 import { Input } from "./Input";
 import { Spinner } from "./Spinner";
 // Types
-import type { UrlData, VisitedUrlData } from "@typos/types";
+import type { FetchedResource, VisitedUrlData } from "@typos/types";
 // Libraries
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import autoAnimate from "@formkit/auto-animate";
@@ -23,6 +23,15 @@ export const App = () => {
   ];
 
   useEffect(() => {
+    localStorage.getItem("visitedUrls") &&
+      setVisitedUrls(JSON.parse(localStorage.getItem("visitedUrls") as string));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("visitedUrls", JSON.stringify(visitedUrls));
+  }, [visitedUrls]);
+
+  useEffect(() => {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
 
@@ -31,7 +40,7 @@ export const App = () => {
 
     fetch("/api/get-information?url=" + link)
       .then((res) => res.json())
-      .then((data: UrlData) => {
+      .then((data: FetchedResource) => {
         setHtml(data.html);
 
         const foundIndex = historyUrls.findIndex(
@@ -39,14 +48,12 @@ export const App = () => {
         );
 
         if (foundIndex === -1) {
-          const newUrl = { ...data, inputUrl: link };
-
+          const newUrl = { ...data, inputUrl: link, html: undefined };
           setVisitedUrls([...historyUrls.slice(-4), newUrl]);
           return;
         }
 
         const newUrls = [...historyUrls];
-
         const [url] = newUrls.splice(foundIndex, 1);
         newUrls.push(url);
         setVisitedUrls(newUrls);
@@ -83,7 +90,7 @@ export const App = () => {
             setUrl={setUrl}
             setData={setData}
           />
-          <History historyUrls={visitedUrls} setData={setData} />
+          {html && <History historyUrls={visitedUrls} setData={setData} />}
         </div>
       </section>
       {loading ? (

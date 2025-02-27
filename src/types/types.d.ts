@@ -1,10 +1,13 @@
-export interface UrlData {
+interface Url {
   id: string;
-  html: string;
   slug: string;
   url: string;
 }
 
-export interface VisitedUrlData extends UrlData {
+export interface FetchedResource extends Url {
+  html: string;
+}
+
+export interface VisitedUrlData extends Url {
   inputUrl: string;
 }

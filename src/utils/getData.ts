@@ -1,7 +1,7 @@
 import axios from "axios";
-import type { UrlData } from "@typos/types";
+import type { FetchedResource } from "@typos/types";
 
-export const getData = async (url: string): Promise<UrlData> => {
+export const getData = async (url: string): Promise<FetchedResource> => {
   const response = await axios.get(url);
   const slug = new URL(url).pathname.split("/").filter(Boolean).pop() || "";
 
