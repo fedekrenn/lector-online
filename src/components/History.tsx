@@ -1,13 +1,13 @@
 // Components
 import { HistoryChild } from "./HistoryChild";
 // Types
-import type { VisitedUrl } from "@typos/types";
+import type { VisitedUrlData } from "@typos/types";
 // Libraries
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 interface Params {
-  historyUrls: VisitedUrl[];
-  setData: (text: string, historyUrls: VisitedUrl[]) => void;
+  historyUrls: VisitedUrlData[];
+  setData: (text: string, historyUrls: VisitedUrlData[]) => void;
 }
 
 export const History = ({ historyUrls, setData }: Params) => {
@@ -25,10 +25,11 @@ export const History = ({ historyUrls, setData }: Params) => {
         maxWidth: "200px",
       }}
     >
-      {historyUrls.map(({ id, url }) => (
+      {historyUrls.map(({ id, url, slug }) => (
         <HistoryChild
           key={id}
           url={url}
+          slug={slug}
           historyUrls={historyUrls}
           setData={setData}
         />

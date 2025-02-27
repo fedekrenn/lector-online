@@ -1,13 +1,14 @@
 // Types
-import type { VisitedUrl } from "@typos/types";
+import type { VisitedUrlData } from "@typos/types";
 
 interface Params {
   url: string;
-  historyUrls: VisitedUrl[];
-  setData: (text: string, historyUrls: VisitedUrl[]) => void;
+  slug: string;
+  historyUrls: VisitedUrlData[];
+  setData: (text: string, historyUrls: VisitedUrlData[]) => void;
 }
 
-export const HistoryChild = ({ url, historyUrls, setData }: Params) => {
+export const HistoryChild = ({ url, slug, historyUrls, setData }: Params) => {
   return (
     <li>
       <button
@@ -23,7 +24,7 @@ export const HistoryChild = ({ url, historyUrls, setData }: Params) => {
         onClick={() => setData(url, historyUrls)}
         title={url}
       >
-        {url.slice(0, 30)}...
+        {slug.slice(0, 30)}...
       </button>
     </li>
   );

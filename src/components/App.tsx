@@ -4,7 +4,7 @@ import { History } from "./History";
 import { Input } from "./Input";
 import { Spinner } from "./Spinner";
 // Types
-import type { VisitedUrl } from "@typos/types";
+import type { UrlData, VisitedUrlData } from "@typos/types";
 // Libraries
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import autoAnimate from "@formkit/auto-animate";
@@ -12,7 +12,7 @@ import autoAnimate from "@formkit/auto-animate";
 export const App = () => {
   const [url, setUrl] = useState<string>("");
   const [html, setHtml] = useState<string>("");
-  const [visitedUrls, setVisitedUrls] = useState<VisitedUrl[]>([]);
+  const [visitedUrls, setVisitedUrls] = useState<VisitedUrlData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const parent = useRef(null);
@@ -26,23 +26,27 @@ export const App = () => {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
 
-  const setData = (link: string, historyUrls: VisitedUrl[]) => {
+  const setData = (link: string, historyUrls: VisitedUrlData[]) => {
     setLoading(true);
 
     fetch("/api/get-information?url=" + link)
-      .then((res) => res.text())
-      .then((data) => {
-        setHtml(data);
+      .then((res) => res.json())
+      .then((data: UrlData) => {
+        setHtml(data.html);
 
-        const foundIndex = historyUrls.findIndex(({ url }) => url === link);
+        const foundIndex = historyUrls.findIndex(
+          ({ inputUrl, url }) => inputUrl === link || url === link
+        );
 
         if (foundIndex === -1) {
-          const newUrl = { id: Date.now().toString(), url: link };
+          const newUrl = { ...data, inputUrl: link };
+
           setVisitedUrls([...historyUrls.slice(-4), newUrl]);
           return;
         }
 
         const newUrls = [...historyUrls];
+
         const [url] = newUrls.splice(foundIndex, 1);
         newUrls.push(url);
         setVisitedUrls(newUrls);

@@ -3,13 +3,13 @@ import icon from "@assets/search.svg?url";
 // Styles
 import "@styles/Input-temporal.css";
 // Types
-import type { VisitedUrl } from "@typos/types";
+import type { UrlData, VisitedUrlData } from "@typos/types";
 
 interface Props {
   url: string;
-  historyUrls: VisitedUrl[];
+  historyUrls: VisitedUrlData[];
   setUrl: (url: string) => void;
-  setData: (text: string, historyUrls: VisitedUrl[]) => void;
+  setData: (text: string, historyUrls: VisitedUrlData[]) => void;
 }
 
 export const Input = ({ url, historyUrls, setUrl, setData }: Props) => {
