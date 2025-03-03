@@ -14,6 +14,7 @@ export const App = () => {
   const [html, setHtml] = useState<string>("");
   const [visitedUrls, setVisitedUrls] = useState<VisitedUrlData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   const parent = useRef(null);
   const parent2 = useRef(null);
@@ -36,10 +37,20 @@ export const App = () => {
   }, [parent]);
 
   const setData = (link: string, historyUrls: VisitedUrlData[]) => {
+    if (link.trim() === "") {
+      alert("Por favor ingresa una URL válida");
+      return;
+    }
+
     setLoading(true);
 
-    fetch("/api/get-information?url=" + link)
-      .then((res) => res.json())
+    fetch(`/api/get-information?url=${link}`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        }
+        return res.json();
+      })
       .then((data: FetchedResource) => {
         setHtml(data.html);
 
@@ -58,6 +69,7 @@ export const App = () => {
         newUrls.push(url);
         setVisitedUrls(newUrls);
       })
+      .catch(() => setError(true))
       .finally(() => setLoading(false));
   };
 
@@ -96,15 +108,23 @@ export const App = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <iframe
-          style={{
-            border: "none",
-            width: "100%",
-            height: "100%",
-            display: `${html ? "block" : "none"}`,
-          }}
-          srcDoc={html}
-        />
+        <>
+          {error ? (
+            <p style={{ paddingTop: '40px', height: "100%" }}>
+              Ups! Ocurrió un error. Intenta nuevamente.
+            </p>
+          ) : (
+            <iframe
+              style={{
+                border: "none",
+                width: "100%",
+                height: "100%",
+                display: `${html ? "block" : "none"}`,
+              }}
+              srcDoc={html}
+            />
+          )}
+        </>
       )}
     </main>
   );
