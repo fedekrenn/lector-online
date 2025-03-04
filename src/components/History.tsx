@@ -16,15 +16,7 @@ export const History = ({ historyUrls, setData }: Params) => {
   ];
 
   return (
-    <ul
-      ref={animationParent}
-      style={{
-        margin: 0,
-        listStyle: "none",
-        padding: "0 10px",
-        maxWidth: "200px",
-      }}
-    >
+    <ul ref={animationParent} className="m-0 list-none p-0 px-2 max-w-200">
       {historyUrls.map(({ id, url, slug }) => (
         <HistoryChild
           key={id}

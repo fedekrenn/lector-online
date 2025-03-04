@@ -1,12 +1,5 @@
-.spinner {
-  display: flex;
-  justify-content: center;
-  height: 100%;
-
-  & img {
-    width: 50px;
-    animation: spin 1.5s infinite;
-  }
+.spinner img {
+  animation: spin 1.5s infinite;
 }
 
 @keyframes spin {

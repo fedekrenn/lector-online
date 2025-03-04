@@ -10,17 +10,9 @@ interface Params {
 
 export const HistoryChild = ({ url, slug, historyUrls, setData }: Params) => {
   return (
-    <li>
+    <li className="h-5 leading-normal">
       <button
-        style={{
-          width: "100%",
-          textAlign: "left",
-          padding: "4px",
-          border: "none",
-          background: "none",
-          cursor: "pointer",
-          fontSize: "11px",
-        }}
+        className="w-full text-left px-1 border-none bg-transparent cursor-pointer text-[11px]"
         onClick={() => setData(url, historyUrls)}
         title={url}
       >

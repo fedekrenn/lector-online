@@ -3,25 +3,13 @@ import background from "@assets/background.svg";
 import { App } from "./App";
 ---
 
-<div id="container">
-  <img id="background" src={background.src} alt="" fetchpriority="high" />
+<div class="h-full">
+  <img
+    src={background.src}
+    fetchpriority="high"
+    class="w-full h-full top-0 left-0 fixed z-0 blur-3xl"
+  />
   <App client:load />
 </div>
 
 <script></script>
-
-<style>
-  #background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    filter: blur(100px);
-  }
-
-  #container {
-    height: 100%;
-  }
-</style>

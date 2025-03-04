@@ -76,26 +76,14 @@ export const App = () => {
   return (
     <main
       ref={parent}
-      style={{
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
+      className="h-full w-full flex justify-center items-center flex-col"
     >
       <section
         ref={animationParent}
         id="hero"
-        style={{
-          display: "flex",
-          alignItems: "start",
-          justifyContent: "center",
-          padding: "16px",
-        }}
+        className="flex items-start justify-center p-4"
       >
-        <div ref={parent2} style={{ display: "flex" }}>
+        <div ref={parent2} className="flex">
           <Input
             url={url}
             historyUrls={visitedUrls}
@@ -110,17 +98,14 @@ export const App = () => {
       ) : (
         <>
           {error ? (
-            <p style={{ paddingTop: '40px', height: "100%" }}>
+            <p className="pt-10 h-full">
               Ups! Ocurrió un error. Intenta nuevamente.
             </p>
           ) : (
             <iframe
-              style={{
-                border: "none",
-                width: "100%",
-                height: "100%",
-                display: `${html ? "block" : "none"}`,
-              }}
+              className={`w-full h-full border-none ${
+                html ? "block" : "hidden"
+              }`}
               srcDoc={html}
             />
           )}
