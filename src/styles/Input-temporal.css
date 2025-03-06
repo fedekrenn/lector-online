@@ -1,28 +1,11 @@
 .search-btn {
   transition: width 0.3s ease-in-out !important;
 
-  &:focus-within {
-    width: 400px;
-  }
-
-  & input {
-    &:focus {
-      outline: none;
-      width: 100%;
-    }
-
-    &:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 30px white inset;
-    }
+  & input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset;
   }
 
   & button {
     transition: all 0.1s;
-
-    &:hover {
-      background-color: rgb(230, 230, 230);
-      transform: scale(1.1);
-      cursor: pointer;
-    }
   }
 }
