@@ -1,6 +1,5 @@
 // Assets
 import loadingIcon from "@assets/loading.svg";
-import "@styles/Spinner-temporal.css";
 
 export const Spinner = () => {
   return (

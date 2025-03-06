@@ -1,7 +1,5 @@
 // assets
 import icon from "@assets/search.svg";
-// Styles
-import "@styles/Input-temporal.css";
 // Types
 import type { VisitedUrlData } from "@typos/types";
 
@@ -25,7 +23,7 @@ export const Input = ({ url, historyUrls, setUrl, setData }: Props) => {
       onSubmit={handleSubmit}
     >
       <input
-        className="border-none px-2 text-sm focus:outline-none focus:w-full"
+        className="border-none px-2 text-sm focus:outline-none focus:w-full custom-autofill"
         value={url}
         id="form-url"
         type="url"

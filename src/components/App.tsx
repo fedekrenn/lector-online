@@ -14,7 +14,6 @@ export const App = () => {
   const [html, setHtml] = useState<string>("");
   const [visitedUrls, setVisitedUrls] = useState<VisitedUrlData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
 
   const parent = useRef(null);
   const parent2 = useRef(null);
@@ -37,20 +36,10 @@ export const App = () => {
   }, [parent]);
 
   const setData = (link: string, historyUrls: VisitedUrlData[]) => {
-    if (link.trim() === "") {
-      alert("Por favor ingresa una URL válida");
-      return;
-    }
-
     setLoading(true);
 
-    fetch(`/api/get-information?url=${link}`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(res.statusText);
-        }
-        return res.json();
-      })
+    fetch("/api/get-information?url=" + link)
+      .then((res) => res.json())
       .then((data: FetchedResource) => {
         setHtml(data.html);
 
@@ -69,21 +58,32 @@ export const App = () => {
         newUrls.push(url);
         setVisitedUrls(newUrls);
       })
-      .catch(() => setError(true))
       .finally(() => setLoading(false));
   };
 
   return (
     <main
       ref={parent}
-      className="h-full w-full flex justify-center items-center flex-col"
+      style={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
     >
       <section
         ref={animationParent}
         id="hero"
-        className="flex items-start justify-center p-4"
+        style={{
+          display: "flex",
+          alignItems: "start",
+          justifyContent: "center",
+          padding: "16px",
+        }}
       >
-        <div ref={parent2} className="flex">
+        <div ref={parent2} style={{ display: "flex" }}>
           <Input
             url={url}
             historyUrls={visitedUrls}
@@ -96,20 +96,15 @@ export const App = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <>
-          {error ? (
-            <p className="pt-10 h-full">
-              Ups! Ocurrió un error. Intenta nuevamente.
-            </p>
-          ) : (
-            <iframe
-              className={`w-full h-full border-none ${
-                html ? "block" : "hidden"
-              }`}
-              srcDoc={html}
-            />
-          )}
-        </>
+        <iframe
+          style={{
+            border: "none",
+            width: "100%",
+            height: "100%",
+            display: `${html ? "block" : "none"}`,
+          }}
+          srcDoc={html}
+        />
       )}
     </main>
   );
