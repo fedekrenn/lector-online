@@ -2,12 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .custom-autofill:-webkit-autofill {
-    background-color: white;
-    color: black;
-    box-shadow: 0 0 0 30px white inset;
-  }
+.custom-autofill:-webkit-autofill {
+  background-color: white;
+  box-shadow: 0 0 0 30px white inset;
 }
 
 .search-btn {
