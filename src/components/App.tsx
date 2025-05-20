@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+// Assets
+import history from "@assets/history.svg";
 // Components
 import { History } from "./History";
 import { Input } from "./Input";
@@ -17,6 +19,7 @@ export const App = () => {
 
   const parent = useRef(null);
   const parent2 = useRef(null);
+  const aside = useRef<HTMLDivElement>(null);
 
   const [animationParent] = useAutoAnimate({ duration: 400 }) as unknown as [
     React.RefObject<HTMLDivElement>
@@ -34,6 +37,12 @@ export const App = () => {
   useEffect(() => {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
+
+  const hideAside = () => {
+    if (aside.current) {
+      aside.current.classList.toggle("hiddenAside");
+    }
+  };
 
   const setData = (link: string, historyUrls: VisitedUrlData[]) => {
     setLoading(true);
@@ -71,14 +80,19 @@ export const App = () => {
         id="hero"
         className="flex items-start justify-center p-4"
       >
-        <div ref={parent2} className="flex">
+        <div ref={parent2} className="flex items-center gap-2">
           <Input
             url={url}
             historyUrls={visitedUrls}
             setUrl={setUrl}
             setData={setData}
           />
-          {html && <History historyUrls={visitedUrls} setData={setData} />}
+          <button
+            onClick={hideAside}
+            className="hover:cursor-pointer hover:scale-110"
+          >
+            <img className="align-middle w-7" src={history.src} alt="Buscar" />
+          </button>
         </div>
       </section>
       {loading ? (
@@ -89,6 +103,12 @@ export const App = () => {
           srcDoc={html}
         />
       )}
+      <aside
+        className="w-1/4 h-full bg-[#e9d7f5] p-4 absolute right-0 top-0"
+        ref={aside}
+      >
+        <History historyUrls={visitedUrls} setData={setData} />
+      </aside>
     </main>
   );
 };
