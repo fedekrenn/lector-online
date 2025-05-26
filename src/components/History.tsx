@@ -16,7 +16,10 @@ export const History = ({ historyUrls, setData }: Params) => {
   ];
 
   return (
-    <ul ref={animationParent} className="m-0 list-none p-0 px-2 max-w-200">
+    <ul
+      ref={animationParent}
+      className="my-2 p-0 flex flex-col gap-3 px-2 max-w-200"
+    >
       {historyUrls.map(({ id, url, slug }) => (
         <HistoryChild
           key={id}

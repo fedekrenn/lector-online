@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 // Assets
 import history from "@assets/history.svg";
+import closeIcon from "@assets/close.svg";
 // Components
 import { History } from "./History";
 import { Input } from "./Input";
@@ -38,7 +39,7 @@ export const App = () => {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
 
-  const hideAside = () => {
+  const toggleAside = () => {
     if (aside.current) {
       aside.current.classList.toggle("hiddenAside");
     }
@@ -58,7 +59,7 @@ export const App = () => {
 
         if (foundIndex === -1) {
           const newUrl = { ...data, inputUrl: link, html: undefined };
-          setVisitedUrls([...historyUrls.slice(-4), newUrl]);
+          setVisitedUrls([...historyUrls.slice(-9), newUrl]);
           return;
         }
 
@@ -88,7 +89,7 @@ export const App = () => {
             setData={setData}
           />
           <button
-            onClick={hideAside}
+            onClick={toggleAside}
             className="hover:cursor-pointer hover:scale-110"
           >
             <img className="align-middle w-7" src={history.src} alt="Buscar" />
@@ -104,9 +105,22 @@ export const App = () => {
         />
       )}
       <aside
-        className="w-1/4 h-full bg-[#e9d7f5] p-4 absolute right-0 top-0"
+        className="w-1/4 h-full bg-[#FDF9FD] p-4 absolute right-0 top-0"
         ref={aside}
       >
+        <header className="flex items-center justify-between p-4 border-b border-gray-200/50">
+          <h2 className="text-lg font-semibold text-gray-800">Historial</h2>
+          <button
+            onClick={toggleAside}
+            className="hover:cursor-pointer hover:scale-110"
+          >
+            <img
+              className="align-middle w-7"
+              src={closeIcon.src}
+              alt="Cerrar"
+            />
+          </button>
+        </header>
         <History historyUrls={visitedUrls} setData={setData} />
       </aside>
     </main>
