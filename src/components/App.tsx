@@ -105,7 +105,7 @@ export const App = () => {
         />
       )}
       <aside
-        className="w-1/4 h-full bg-[#FDF9FD] p-4 absolute right-0 top-0"
+        className="w-96 h-full overflow-hidden bg-[#FDF9FD] p-4 absolute right-0 top-0 hiddenAside"
         ref={aside}
       >
         <header className="flex items-center justify-between p-4 border-b border-gray-200/50">
