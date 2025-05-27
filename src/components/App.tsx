@@ -90,7 +90,7 @@ export const App = () => {
           />
           <button
             onClick={toggleAside}
-            className="hover:cursor-pointer hover:scale-110"
+            className="hover:cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
           >
             <img className="align-middle w-7" src={history.src} alt="Buscar" />
           </button>
@@ -112,7 +112,7 @@ export const App = () => {
           <h2 className="text-lg font-semibold text-gray-800">Historial</h2>
           <button
             onClick={toggleAside}
-            className="hover:cursor-pointer hover:scale-110"
+            className="hover:cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
           >
             <img
               className="align-middle w-7"
