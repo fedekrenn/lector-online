@@ -19,7 +19,7 @@ export const Input = ({ url, historyUrls, setUrl, setData }: Props) => {
 
   return (
     <form
-      className="search-btn w-72 flex h-fit center justify-between items-center bg-white p-1 rounded-full shadow-md focus-within:w-[400px]"
+      className="search-btn w-72 flex h-fit center justify-between items-center bg-white p-1 rounded-full shadow-md focus-within:w-[400px] transition-all duration-300 ease-in-out"
       onSubmit={handleSubmit}
     >
       <input
@@ -30,7 +30,7 @@ export const Input = ({ url, historyUrls, setUrl, setData }: Props) => {
         placeholder="https://pagina-diario.com"
         onChange={(e) => setUrl(e.target.value)}
       />
-      <button className="bg-white p-[3px] w-6 h-6 rounded-full aspect-square border-none text-inherit hover:cursor-pointer hover:scale-110 hover:bg-gray-100">
+      <button className="bg-white p-[3px] w-6 h-6 rounded-full aspect-square border-none text-inherit hover:cursor-pointer hover:scale-110 hover:bg-gray-100 transition-transform duration-300 ease-in-out">
         <img className="align-middle w-5" src={icon.src} alt="Buscar" />
       </button>
     </form>
