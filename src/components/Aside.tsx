@@ -15,7 +15,7 @@ interface Params {
 export const Aside = ({ aside, visitedUrls, toggleAside, setData }: Params) => {
   return (
     <aside
-      className="w-96 h-full overflow-hidden bg-[#FDF9FD] p-4 absolute right-0 top-0 hiddenAside"
+      className="hiddenAside w-96 h-full overflow-hidden bg-[#FDF9FD] p-4 absolute right-0 top-0 z-10"
       ref={aside}
     >
       <header className="flex items-center justify-between p-4 border-b border-gray-200/50">
