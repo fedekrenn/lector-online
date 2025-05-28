@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 // Assets
 import history from "@assets/history.svg";
-import closeIcon from "@assets/close.svg";
+
 // Components
-import { History } from "./History";
+
 import { Input } from "./Input";
 import { Spinner } from "./Spinner";
+import { Aside } from "./Aside";
 // Types
 import type { FetchedResource, VisitedUrlData } from "@typos/types";
 // Libraries
@@ -20,7 +21,7 @@ export const App = () => {
 
   const parent = useRef(null);
   const parent2 = useRef(null);
-  const aside = useRef<HTMLDivElement>(null);
+  const aside = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
 
   const [animationParent] = useAutoAnimate({ duration: 400 }) as unknown as [
     React.RefObject<HTMLDivElement>
@@ -104,25 +105,12 @@ export const App = () => {
           srcDoc={html}
         />
       )}
-      <aside
-        className="w-96 h-full overflow-hidden bg-[#FDF9FD] p-4 absolute right-0 top-0 hiddenAside"
-        ref={aside}
-      >
-        <header className="flex items-center justify-between p-4 border-b border-gray-200/50">
-          <h2 className="text-lg font-semibold text-gray-800">Historial</h2>
-          <button
-            onClick={toggleAside}
-            className="hover:cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
-          >
-            <img
-              className="align-middle w-7"
-              src={closeIcon.src}
-              alt="Cerrar"
-            />
-          </button>
-        </header>
-        <History historyUrls={visitedUrls} setData={setData} />
-      </aside>
+      <Aside
+        aside={aside}
+        visitedUrls={visitedUrls}
+        setData={setData}
+        toggleAside={toggleAside}
+      />
     </main>
   );
 };
