@@ -7,7 +7,6 @@ import type { VisitedUrlData } from "@typos/types";
 
 interface Props {
   animationParent: React.RefObject<HTMLDivElement>;
-  parent2: React.RefObject<HTMLDivElement>;
   url: string;
   visitedUrls: VisitedUrlData[];
   setUrl: (url: string) => void;
@@ -17,7 +16,6 @@ interface Props {
 
 export const Header = ({
   animationParent,
-  parent2,
   url,
   visitedUrls,
   setUrl,
@@ -30,7 +28,7 @@ export const Header = ({
       id="hero"
       className="flex items-start justify-center p-4"
     >
-      <div ref={parent2} className="flex items-center gap-2">
+      <div className="flex items-center gap-2">
         <Input
           url={url}
           historyUrls={visitedUrls}

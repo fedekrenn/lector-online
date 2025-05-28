@@ -16,7 +16,6 @@ export const App = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const parent = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
-  const parent2 = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
   const aside = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
 
   const [animationParent] = useAutoAnimate({ duration: 400 }) as unknown as [
@@ -81,7 +80,6 @@ export const App = () => {
       />
       <Header
         animationParent={animationParent}
-        parent2={parent2}
         setData={setData}
         setUrl={setUrl}
         url={url}
