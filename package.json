@@ -16,7 +16,7 @@
     "@tailwindcss/postcss": "^4.1.13",
     "@types/react": "19.1.12",
     "@types/react-dom": "19.1.8",
-    "astro": "5.13.4",
+    "astro": "5.14.3",
     "axios": "1.12.2",
     "react": "19.1.1",
     "react-dom": "19.1.1",
