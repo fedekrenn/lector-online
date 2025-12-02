@@ -11,7 +11,7 @@
   "dependencies": {
     "@astrojs/react": "4.4.1",
     "@astrojs/tailwind": "6.0.2",
-    "@astrojs/vercel": "9.0.0",
+    "@astrojs/vercel": "9.0.2",
     "@formkit/auto-animate": "0.8.4",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/react": "19.1.12",
@@ -29,6 +29,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
-    "tailwindcss": "3.4.17"
+    "tailwindcss": "4.1.17"
   }
 }
