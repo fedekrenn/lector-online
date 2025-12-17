@@ -24,7 +24,8 @@
   },
   "pnpm": {
     "overrides": {
-      "path-to-regexp@^6.0.0": "6.3.0"
+      "path-to-regexp@^6.0.0": "6.3.0",
+      "mdast-util-to-hast@>=13.0.0 <13.2.1": ">=13.2.1"
     }
   },
   "devDependencies": {
