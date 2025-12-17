@@ -15,7 +15,9 @@ export const App = () => {
   const [visitedUrls, setVisitedUrls] = useState<VisitedUrlData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const parent = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
+  const parent = useRef<HTMLDivElement>(
+    null
+  ) as React.RefObject<HTMLDivElement>;
   const aside = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
 
   const [animationParent] = useAutoAnimate({ duration: 400 }) as unknown as [
@@ -92,6 +94,8 @@ export const App = () => {
         <iframe
           className={`w-full h-full border-none ${html ? "block" : "hidden"}`}
           srcDoc={html}
+          sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+          referrerPolicy="no-referrer"
         />
       )}
     </main>
