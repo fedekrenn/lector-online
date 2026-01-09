@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { getData } from "../../utils/getData";
+import { CustomError } from "../../errors/customError";
 
 export const GET: APIRoute = async ({ request }): Promise<Response> => {
   try {
@@ -14,26 +15,6 @@ export const GET: APIRoute = async ({ request }): Promise<Response> => {
       });
     }
 
-    let parsed: URL;
-    try {
-      parsed = new URL(url);
-    } catch (err) {
-      return new Response(JSON.stringify({ error: "Invalid URL" }), {
-        status: 400,
-        headers: { "content-type": "application/json" },
-      });
-    }
-
-    if (parsed.protocol !== "https:") {
-      return new Response(
-        JSON.stringify({ error: "Only https:// URLs are allowed" }),
-        {
-          status: 400,
-          headers: { "content-type": "application/json" },
-        }
-      );
-    }
-
     const res = await getData(url);
 
     return new Response(JSON.stringify(res), {
@@ -42,8 +23,22 @@ export const GET: APIRoute = async ({ request }): Promise<Response> => {
       },
     });
   } catch (error: any) {
-    return new Response(error.message || "Internal Server Error", {
-      status: 500,
-    });
+    if (error instanceof CustomError) {
+      return new Response(
+        JSON.stringify({ error: error.message, statusText: error.statusText }),
+        {
+          status: error.status,
+          headers: { "content-type": "application/json" },
+        }
+      );
+    }
+
+    return new Response(
+      JSON.stringify({ error: error?.message || "Internal Server Error" }),
+      {
+        status: 500,
+        headers: { "content-type": "application/json" },
+      }
+    );
   }
 };
