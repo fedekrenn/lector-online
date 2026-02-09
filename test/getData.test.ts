@@ -82,7 +82,7 @@ describe("getData", () => {
       const mockDateNow = vi.spyOn(Date, "now");
       mockDateNow.mockReturnValueOnce(1000000);
       const result1 = await getData("https://example.com/test1");
-      
+
       mockDateNow.mockReturnValueOnce(2000000);
       const result2 = await getData("https://example.com/test2");
 
@@ -90,7 +90,7 @@ describe("getData", () => {
       expect(result2.id).toBe("2000000");
       expect(result1.id).not.toBe(result2.id);
       expect(typeof result1.id).toBe("string");
-      
+
       mockDateNow.mockRestore();
     });
   });
