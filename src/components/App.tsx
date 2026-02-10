@@ -4,6 +4,7 @@ import { Spinner } from "./Spinner";
 import { Aside } from "./Aside";
 import { Header } from "./Header";
 import { ErrorDisplay } from "./ErrorDisplay";
+import { Disclaimer } from "./Disclaimer";
 // Types
 import type { FetchedResource, VisitedUrlData } from "@typos/types";
 // Libraries
@@ -111,13 +112,15 @@ export const App = () => {
         <Spinner />
       ) : error ? (
         <ErrorDisplay error={error} onDismiss={() => setError("")} />
-      ) : (
+      ) : html ? (
         <iframe
-          className={`w-full h-full border-none ${html ? "block" : "hidden"}`}
+          className="w-full h-full border-none"
           srcDoc={html}
           sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"
           referrerPolicy="no-referrer"
         />
+      ) : (
+        <Disclaimer className="mt-8" />
       )}
     </main>
   );
