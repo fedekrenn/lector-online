@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Spinner } from "./Spinner";
 import { Aside } from "./Aside";
 import { Header } from "./Header";
+import { ErrorDisplay } from "./ErrorDisplay";
 // Types
 import type { FetchedResource, VisitedUrlData } from "@typos/types";
 // Libraries
@@ -14,14 +15,15 @@ export const App = () => {
   const [html, setHtml] = useState<string>("");
   const [visitedUrls, setVisitedUrls] = useState<VisitedUrlData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const parent = useRef<HTMLDivElement>(
-    null
+    null,
   ) as React.RefObject<HTMLDivElement>;
   const aside = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
 
   const [animationParent] = useAutoAnimate({ duration: 400 }) as unknown as [
-    React.RefObject<HTMLDivElement>
+    React.RefObject<HTMLDivElement>,
   ];
 
   useEffect(() => {
@@ -45,14 +47,24 @@ export const App = () => {
 
   const setData = (link: string, historyUrls: VisitedUrlData[]) => {
     setLoading(true);
+    setError("");
 
     fetch("/api/get-information?url=" + link)
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          throw new Error(
+            errorData.error || `Error ${res.status}: ${res.statusText}`,
+          );
+        }
+        return res.json();
+      })
       .then((data: FetchedResource) => {
         setHtml(data.html);
+        setError("");
 
         const foundIndex = historyUrls.findIndex(
-          ({ inputUrl, url }) => inputUrl === link || url === link
+          ({ inputUrl, url }) => inputUrl === link || url === link,
         );
 
         if (foundIndex === -1) {
@@ -65,6 +77,13 @@ export const App = () => {
         const [url] = newUrls.splice(foundIndex, 1);
         newUrls.push(url);
         setVisitedUrls(newUrls);
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+        setError(
+          err.message || "Ha ocurrido un error al intentar cargar la página",
+        );
+        setHtml("");
       })
       .finally(() => setLoading(false));
   };
@@ -90,6 +109,8 @@ export const App = () => {
       />
       {loading ? (
         <Spinner />
+      ) : error ? (
+        <ErrorDisplay error={error} onDismiss={() => setError("")} />
       ) : (
         <iframe
           className={`w-full h-full border-none ${html ? "block" : "hidden"}`}
