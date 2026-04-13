@@ -6,7 +6,7 @@ const URL = "http://localhost:4321";
 describe("API Endpoints", () => {
   it("GET /api/get-information should return 200", async () => {
     const response = await request(URL).get(
-      "/api/get-information?url=https://example.com"
+      "/api/get-information?url=https://federico-krenn.vercel.app/"
     );
     expect(response.status).toBe(200);
   });
