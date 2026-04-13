@@ -2,6 +2,11 @@
   "name": "leer-diario",
   "type": "module",
   "version": "2.0.0",
+  "pnpm": {
+    "overrides": {
+      "yaml": ">=2.8.3"
+    }
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -11,37 +16,28 @@
     "test:ui": "vitest --ui"
   },
   "dependencies": {
-    "@astrojs/react": "4.4.2",
-    "@astrojs/vercel": "9.0.4",
-    "@formkit/auto-animate": "0.8.4",
-    "@tailwindcss/postcss": "^4.2.1",
+    "@astrojs/react": "5.0.3",
+    "@astrojs/vercel": "10.0.4",
+    "@formkit/auto-animate": "0.9.0",
+    "@tailwindcss/postcss": "4.2.2",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "astro": "5.18.0",
-    "axios": "1.13.5",
-    "isomorphic-dompurify": "^2.36.0",
-    "playwright": "^1.58.2",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "sonner": "^2.0.7"
+    "astro": "6.1.6",
+    "axios": "1.15.0",
+    "isomorphic-dompurify": "3.8.0",
+    "playwright": "1.59.1",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "sonner": "2.0.7"
   },
   "devDependencies": {
-    "@types/node": "^22.19.13",
-    "@types/supertest": "^7.2.0",
-    "@vitest/ui": "4.0.18",
-    "autoprefixer": "^10.4.21",
-    "supertest": "^7.2.2",
-    "tailwindcss": "4.2.1",
-    "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.0.18"
-  },
-  "pnpm": {
-    "overrides": {
-      "tar": "7.5.9",
-      "minimatch": "10.2.4",
-      "devalue": "5.6.3",
-      "rollup": "4.59.0",
-      "ajv": "8.18.0"
-    }
+    "@types/node": "25.6.0",
+    "@types/supertest": "7.2.0",
+    "@vitest/ui": "4.1.4",
+    "autoprefixer": "10.5.0",
+    "supertest": "7.2.2",
+    "tailwindcss": "4.2.2",
+    "vite-tsconfig-paths": "6.1.1",
+    "vitest": "4.1.4"
   }
 }
