@@ -1,10 +1,10 @@
-import DOMPurify, { type Config } from "isomorphic-dompurify";
+import DOMPurify from "isomorphic-dompurify";
 
 /**
  * Configuración de DOMPurify para sanitizar HTML remoto.
  * Permite contenido seguro mientras bloquea scripts maliciosos.
  */
-const DOMPURIFY_CONFIG: Config = {
+const DOMPURIFY_CONFIG = {
   ALLOWED_TAGS: [
     // Estructura
     "html",
