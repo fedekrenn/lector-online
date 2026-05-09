@@ -37,7 +37,8 @@
   },
   "pnpm": {
     "overrides": {
-      "postcss": "8.5.12"
+      "postcss": "8.5.12",
+      "path-to-regexp": ">=0.1.13 <1.0.0 || >=8.4.0"
     }
   }
 }
