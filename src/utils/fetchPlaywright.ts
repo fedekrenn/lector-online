@@ -1,10 +1,16 @@
 import { chromium } from "playwright";
-import { CustomError } from "../errors/customError";
+import { CustomError } from "@errors/customError";
+import { logger } from "@utils/logger";
+
+const log = logger.child({ module: "fetchPlaywright" });
 
 const DEFAULT_USER_AGENT =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
 export const fetchPlaywright = async (url: string): Promise<string> => {
+  const startTime = Date.now();
+
+  log.info({ url }, "Launching headless browser");
   const browser = await chromium.launch({ headless: true });
 
   try {
@@ -16,6 +22,7 @@ export const fetchPlaywright = async (url: string): Promise<string> => {
 
     const page = await context.newPage();
 
+    log.debug({ url }, "Navigating to page");
     await page.goto(url, {
       waitUntil: "domcontentloaded",
       timeout: 30000,
@@ -25,7 +32,7 @@ export const fetchPlaywright = async (url: string): Promise<string> => {
     try {
       await page.waitForLoadState("networkidle", { timeout: 15000 });
     } catch {
-      // ignore
+      log.debug({ url }, "Network idle timeout reached, proceeding with current content");
     }
 
     const html = await page.content();
@@ -37,6 +44,7 @@ export const fetchPlaywright = async (url: string): Promise<string> => {
       html.toLowerCase().includes("enable javascript and cookies");
 
     if (isCloudflareChallenge) {
+      log.warn({ url }, "Cloudflare challenge detected, access blocked");
       throw new CustomError(
         "Blocked by Cloudflare challenge (requires a real browser session)",
         403,
@@ -44,8 +52,12 @@ export const fetchPlaywright = async (url: string): Promise<string> => {
       );
     }
 
+    const durationMs = Date.now() - startTime;
+    log.info({ url, durationMs }, "Playwright fetch completed successfully");
+
     return html;
   } finally {
     await browser.close();
+    log.debug("Browser closed");
   }
 };

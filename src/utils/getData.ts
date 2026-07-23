@@ -1,8 +1,11 @@
 import axios from "axios";
-import { sanitizeHtml, injectCSPMetaTag } from "./sanitizeHtml";
-import { CustomError } from "../errors/customError";
-import { fetchPlaywright } from "./fetchPlaywright";
+import { sanitizeHtml, injectCSPMetaTag } from "@utils/sanitizeHtml";
+import { CustomError } from "@errors/customError";
+import { fetchPlaywright } from "@utils/fetchPlaywright";
+import { logger } from "@utils/logger";
 import type { FetchedResource } from "@typos/types";
+
+const log = logger.child({ module: "getData" });
 
 const DEFAULT_HEADERS = {
   "user-agent":
@@ -18,12 +21,16 @@ export const getData = async (url: string): Promise<FetchedResource> => {
   try {
     parsed = new URL(url);
   } catch (err) {
+    log.warn({ url }, "Invalid URL received");
     throw new CustomError("Invalid URL", 400, "Bad Request");
   }
 
   if (parsed.protocol !== "https:") {
+    log.warn({ url, protocol: parsed.protocol }, "Non-HTTPS URL rejected");
     throw new CustomError("Only https:// URLs are allowed", 400, "Bad Request");
   }
+
+  log.debug({ url }, "Fetching page via axios");
 
   // First try a normal HTTP fetch (fast). Some sites will still block this with a Cloudflare challenge.
   const response = await axios.get(url, {
@@ -37,8 +44,13 @@ export const getData = async (url: string): Promise<FetchedResource> => {
   let rawHtml: string;
 
   if (response.status >= 200 && response.status < 300) {
+    log.debug({ url, status: response.status }, "Axios fetch successful");
     rawHtml = response.data;
   } else {
+    log.info(
+      { url, axiosStatus: response.status },
+      "Axios fetch failed, falling back to Playwright",
+    );
     rawHtml = await fetchPlaywright(url);
   }
 
@@ -46,6 +58,8 @@ export const getData = async (url: string): Promise<FetchedResource> => {
 
   const sanitizedHtml = sanitizeHtml(rawHtml);
   const secureHtml = injectCSPMetaTag(sanitizedHtml);
+
+  log.debug({ url, slug, htmlLength: secureHtml.length }, "Page processed successfully");
 
   return {
     id: Date.now().toString(),
