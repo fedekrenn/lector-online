@@ -6,7 +6,7 @@ const URL = "http://localhost:4321";
 describe("API Endpoints", () => {
   it("GET /api/get-information should return 200", async () => {
     const response = await request(URL).get(
-      "/api/get-information?url=https://federico-krenn.vercel.app/"
+      "/api/get-information?url=https://federico-krenn.vercel.app/",
     );
     expect(response.status).toBe(200);
   });
@@ -18,15 +18,26 @@ describe("API Endpoints", () => {
 
   it("GET /api/get-information should return 400 for invalid url", async () => {
     const response = await request(URL).get(
-      "/api/get-information?url=invalid-url"
+      "/api/get-information?url=invalid-url",
     );
     expect(response.status).toBe(400);
   });
 
   it("GET /api/get-information should return 400 if not https", async () => {
     const response = await request(URL).get(
-      "/api/get-information?url=http://example.com"
+      "/api/get-information?url=http://example.com",
     );
     expect(response.status).toBe(400);
+  });
+
+  it("GET /api/get-information should not expose raw backend errors", async () => {
+    const response = await request(URL).get(
+      "/api/get-information?url=invalid-url",
+    );
+
+    expect(response.status).toBe(400);
+    expect(response.body.error).not.toBe("Invalid URL");
+    expect(response.body.error).not.toContain("Only https://");
+    expect(response.body).not.toHaveProperty("statusText");
   });
 });

@@ -80,10 +80,8 @@ export const App = () => {
         setVisitedUrls(newUrls);
       })
       .catch((err) => {
-        console.error("Error fetching data:", err);
-        setError(
-          err.message || "Ha ocurrido un error al intentar cargar la página",
-        );
+        console.error("Error fetching data");
+        setError("Ha ocurrido un error al intentar cargar la página");
         setHtml("");
       })
       .finally(() => setLoading(false));
