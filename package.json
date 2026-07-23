@@ -1,10 +1,11 @@
 {
   "name": "leer-diario",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "packageManager": "pnpm@11.17.0",
   "scripts": {
     "dev": "astro dev",
+    "stop": "astro dev stop",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -12,6 +13,7 @@
     "test:ui": "vitest --ui"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/react": "6.0.1",
     "@astrojs/vercel": "11.0.3",
     "@formkit/auto-animate": "0.9.0",
@@ -24,7 +26,8 @@
     "playwright": "1.59.1",
     "react": "19.2.5",
     "react-dom": "19.2.5",
-    "sonner": "2.0.7"
+    "sonner": "2.0.7",
+    "typescript": "^7.0.2"
   },
   "devDependencies": {
     "@types/node": "25.6.0",
