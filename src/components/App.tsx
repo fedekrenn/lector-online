@@ -81,7 +81,11 @@ export const App = () => {
       })
       .catch((err) => {
         console.error("Error fetching data");
-        setError("Ha ocurrido un error al intentar cargar la página");
+        const message =
+          err instanceof Error && err.message
+            ? err.message
+            : "Ha ocurrido un error al intentar cargar la página";
+        setError(message);
         setHtml("");
       })
       .finally(() => setLoading(false));

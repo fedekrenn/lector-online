@@ -11,7 +11,21 @@ export const fetchPlaywright = async (url: string): Promise<string> => {
   const startTime = Date.now();
 
   log.info({ url }, "Launching headless browser");
-  const browser = await chromium.launch({ headless: true });
+
+  let browser;
+  try {
+    browser = await chromium.launch({ headless: true });
+  } catch (launchError) {
+    log.error(
+      { err: launchError instanceof Error ? launchError : { message: String(launchError) } },
+      "Failed to launch browser — binary may be missing"
+    );
+    throw new CustomError(
+      "No se pudo iniciar el navegador para procesar esta página",
+      500,
+      "Internal Server Error"
+    );
+  }
 
   try {
     const context = await browser.newContext({
